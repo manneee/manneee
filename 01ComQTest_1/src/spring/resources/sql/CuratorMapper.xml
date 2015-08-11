@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CuratorMapper">
+ 	
+ 	<resultMap type="Curator"			id="curatorSelectMap">
+ 		<result property="curId"			column="curId"		jdbcType="NUMERIC"/>
+ 		<result property="purpose"			column="purpose"	jdbcType="VARCHAR"/>
+ 	</resultMap>
+	
+ 	<resultMap type="answerManage"  	id="answerSelectMap">
+		<result property="answerCode" 		column="ans_id" 	jdbcType="NUMERIC"/>
+		<result property="answerText"		column="asente" 	jdbcType="VARCHAR" />
+		<result property="answerKeyword" 	column="aspec" 		jdbcType="VARCHAR" />
+		<result property="questionCode" 	column="que_id" 	jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap type="questionManage"  	id="questionSelectMap">
+		<result property="questionCode"		column="qie_id" 	jdbcType="NUMERIC"/>
+		<result property="curatingCode"		column="cur_id" 	jdbcType="NUMERIC" />
+		<result property="questionText" 	column="qsente" 	jdbcType="VARCHAR" />
+		<result property="answerFormat" 	column="qtype" 		jdbcType="VARCHAR" />
+	</resultMap>
+ 
+</mapper>

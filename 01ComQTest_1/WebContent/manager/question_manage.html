@@ -1,0 +1,146 @@
+<html>
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>ComQ 질문 관리 페이지.</title>
+    <link rel="stylesheet" href="../css/reset.css">
+      
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:700,400" rel="stylesheet" type="text/css">
+   
+    <link rel="stylesheet" href="../css/question_manage.css">
+  </head>
+  
+  <body>
+    <div class="main_wrap">
+      <div class="header_wrap">
+        <div id="header">
+          <div class="mainlogo4">ComQ
+            <span class="pagename">질문 관리페이지</span>
+          </div>
+          <div class="log-form">
+            <div class="log-input">
+              <p>
+                <input class="form-control" type="text" placeholder=" I D ">
+              </p>
+              <p>
+                <input class="form-control" type="text" placeholder=" P A S S W O R D ">
+              </p>
+            </div>
+            <span class="glyphicon glyphicon-user user-icon-size " aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+      
+      <form name="questionForm" method="post" action="/addQuestionManage.do">
+	      <div class="question_admin_area">
+	        <select class="form-control curating_code">
+	          <option value=0>큐레이팅코드</option>
+	          <option>1</option>
+	          <option>2</option>
+	          <option>3</option>
+	          <option>4</option>
+	        </select>
+	        <div class="question_answer_area">
+	          <div class="question">
+	            <input type="text" class="question_index">
+	            <select class="form-control product_value">
+	              <option>물품종류</option>
+	              <option>물품종류2</option>
+	              <option>물품종류3</option>
+	              <option>물품종류4</option>
+	              <option>물품종류5</option>
+	            </select>
+	            <select class="form-control answer_value">
+	              <option>답변유형</option>
+	              <option>checkbox</option>
+	              <option>radio</option>
+	            </select>
+	            <input type="text" class="question_texts form-control" placeholder="질문 문장을 입력하시오.">
+	            <button type="button" class="btn btn-info deletebtn" onclick="questionDelete(this)">-</button>
+	            <button type="button" class="btn btn-info addbtn" onclick="questionAdd(this)">+</button>
+	          </div>
+	          <div class="answer">
+	            <input type="text" class="answer_text form-control" placeholder="답변 문장을 입력하시오.">
+	            <input type="text" class="form-control answer_hidden" placeholder="hidden_keyword">
+	            <button type="button" class="btn btn-info answerdeletebtn" onclick="answerDelete(this)">-</button>
+	            <button type="button" class="btn btn-info answeraddbtn" onclick="answerAdd(this)">+</button>
+	          </div>
+	        </div>
+	      </div>
+    </form>
+      <div class="footer" >
+             <button type="button" class="btn btn-info db_send_btn" onclick="sendQuestionManage()">저장</button>
+      </div>
+    </div>
+    <script type="text/javascript">
+		var questionContainerTemp = $('.question_answer_area').clone();
+		function questionDelete(id) {
+			var isLast = $(id).parent().parent().next().hasClass('question_answer_area') || $(id).parent().parent().prev().hasClass('question_answer_area');
+			if (isLast) {
+				if ($(id).next().hasClass('addbtn')) {
+	                $(id).parent().parent().prev().find('.question').append($(id).next());
+				}
+				$(id).parent().parent().remove();
+			} else {
+				alert('마지막 질문란입니다');
+			}
+		}
+		function questionAdd(id) {
+	        $('.question_admin_area').append(questionContainerTemp.clone());
+			$(id).remove();	
+		}
+
+		var answerContainerTemp = $('.answer').clone();
+		function answerDelete(id) {
+			var isLast = $(id).parent().next().hasClass('answer') || $(id).parent().prev().hasClass('answer');
+			if (isLast) {
+				if ($(id).next().hasClass('answeraddbtn')) { 
+					$(id).parent().prev().append($(id).next());
+				}
+	            $(id).parent().remove();
+			} else {
+				alert('마지막 답변란입니다');
+			}
+		}
+		function answerAdd(id) {
+			var answerClone = answerContainerTemp.clone();
+			answerClone.find('input').val('');
+			
+			answerClone.appendTo($(id).parent().parent());
+			$(id).remove();
+		}
+        
+        function sendQuestionManage() {
+            var area = $('.question_answer_area');
+            var questions = $('.question');
+                        
+	        $('.curating_code').attr('name', 'curatingCode');
+            for(var i = 0; i < area.length; i++) {
+               var question = questions[i];
+               
+               $(question).find('[class*=question_texts]').attr('name', 'questManageList['+i+'].questionText');
+                var answers = $(question).parent().find('.answer');
+                for(var j = 0; j < answers.length; j++) {
+                    var answer = answers[j];
+                    $(answer).find('[class*=answer_text]').attr('name', 'questManageList['+i+'].answers['+j+'].answerText');
+                    $(answer).find('[class*=answer_hidden]').attr('name', 'questManageList['+i+'].answers['+j+'].answerKeyword');
+                }
+            }
+            
+            $('form').submit();
+        }
+    </script>
+  </body>
+
+</html>

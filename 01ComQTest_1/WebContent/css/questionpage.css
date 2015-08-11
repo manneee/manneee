@@ -1,0 +1,91 @@
+body{
+  border : 1px solid transparent;
+  background: url(body_background_op85.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+.main_wrap{
+  position : relative;
+  margin :0px auto;
+  width : 1024px; 
+  min-height : 768px;
+}
+
+.header_wrap{
+  position : absolute;
+  margin :0px auto;
+  background-color: transparent;
+  width : 1024px;
+  height : 20%;
+}
+
+.question_area{
+  border : 1px solid transparent;
+  position : absolute;
+  top : 20%;
+  width : 1024px;
+  min-height : 80%;
+  background-color : transparent;
+}
+
+.mainlogo4 {
+  font-weight: bold;
+  font-size: 4.5em;
+  font-family: 'Montserrat', sans-serif, 'Arial Black';
+  font-style: normal;
+  text-decoration: none;
+  text-shadow: rgb(158, 158, 158) 3px 3px 5px;
+  float: left;
+  margin-top: 5px;
+  margin-left: 20px;
+}
+.mainlogo4 .pagename {
+  font-size: .5em;
+  text-shadow: none;
+}   
+#header {
+  position: relative;
+  border-bottom: 1px solid white;
+  width: 1024px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.log-form {
+  float: right;
+  margin: 10px 5px 0px 0px;
+}
+.log-form .user-icon-size {
+  font-size: 4em;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.log-form .log-input {
+  float: left;
+}
+#accordion div:nth-child(2n){
+  max-height: 65%;
+  overflow: auto;
+}
+
+.footer { 
+  position: absolute;
+  border: 1px solid red;
+  height: 5%;
+  width: 100%;
+  bottom: -5%;
+  
+  margin-top:-1.9em;height:1.9em
+}
+
+.db_send_btn{
+  position: absolute;
+  margin-left: 93%;
+  width: 7%;
+  text-align: center;
+  margin-top: 0.1%;
+}
+
+.checkboxline{
+  vertical-align:  -2%;
+}
